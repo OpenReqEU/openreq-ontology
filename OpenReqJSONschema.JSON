@@ -1,0 +1,660 @@
+{
+  "attachment": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Attachment",
+    "description": "A computer file related with an Attachment to give additional information about it. Attachment has no attachments.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier of an Attachment. Not a null value or an empty string.",
+        "type": "string"
+      },
+      "name": {
+        "description": "The name or title of an Attachment.",
+        "type": "string"
+      },
+      "text": {
+        "description": "The textual description or content of an Attachment. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "The creation time of an Attachment in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "modified_at": {
+        "description": "The latest modification time of an Attachment in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Association to Source of anAttachment, if any.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "comments": {
+        "description": "Aggregation of Comments associated to an Attachment, if any. See the Comment concept below for additional details.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#comment"
+          }
+        }
+      },
+      "file": {
+        "description": "The path to the attachment file",
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "file",
+      "created_at"
+    ]
+  },
+  "comment": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Comment",
+    "description": "The comment that will be referenced from one entity",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier of a Comment. Not a null value or an empty string.",
+        "type": "string"
+      },
+      "name": {
+        "description": "The name or title of a Comment.",
+        "type": "string"
+      },
+      "text": {
+        "description": "The textual description or content of a Comment. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "The creation time of a Comment in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "modified_at": {
+        "description": "The latest modification time of a Comment in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Association to Source of anelement, if any.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "comments": {
+        "description": "Aggregation of Comments associated to a Comment, if any. See the Comment concept below for additional details.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#comment"
+          }
+        }
+      },
+      "attachments": {
+        "description": "Aggregation of Attachments associated to the element, if any.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#attachment"
+          }
+        }
+      },
+      "commentDoneBy": {
+        "description": "The Person who created the Comment.",
+        "type": {
+          "$ref": "#person"
+        }
+      }
+    },
+    "required": [
+      "id",
+      "commentDoneBy",
+      "created_at"
+    ]
+  },
+  "requirement": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Requirement",
+    "description": "A requirement within the OpenReq framework",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier of a Requirement. Not a null value or an empty string.",
+        "type": "string"
+      },
+      "name": {
+        "description": "The name or title of a Requirement.",
+        "type": "string"
+      },
+      "text": {
+        "description": "The textual description or content of a Requirement. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "The creation time of a Requirement in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "modified_at": {
+        "description": "The latest modification time of a Requirement in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Association to Source of a Requirement, if any.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "comments": {
+        "description": "Aggregation of Comments associated to a Requirement, if any. See the Comment concept below for additional details.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#comment"
+          }
+        }
+      },
+      "attachments": {
+        "description": "Aggregation of Attachments associated to the element, if any.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#attachment"
+          }
+        }
+      },
+      "priority": {
+        "description": "The importance of the Requirement in comparison to other Requirements according to given criteria.",
+        "type": "integer"
+      },
+      "requirement_type": {
+        "description": "The type of the Requirement. Requirements types allow to classify requirements by common functions, features or uses, etc.",
+        "type": "string",
+        "enum": [
+          "prose",
+          "requirement",
+          "functional",
+          "non-functional",
+          "issue",
+          "user-story",
+          "epic",
+          "initiative",
+          "task",
+          "bug"
+        ]
+      },
+      "status": {
+        "description": "The state of the Requirement in its life cycle.",
+        "type": "string",
+        "enum": [
+          "submitted",
+          "pending",
+          "accepted",
+          "draft",
+          "deferred",
+          "open",
+          "planned",
+          "completed",
+          "rejected",
+          "recommended"
+        ]
+      },
+      "documentPositionOrder": {
+        "description": "The position of the Requirement as ascending number when Requirements are ordered and order has relevance, such as in a document file.",
+        "type": "integer"
+      },
+      "effort": {
+        "description": "The analyzed effort for implementing the Requirement. The unit of measure is not specified as it depends on the application scenario.",
+        "type": "integer"
+      }
+    },
+    "requirementParts": {
+      "description": "Aggregation of RequirementParts out of which the requirement consists of. This aggregation provides a mechanism for specifying requirement fragments or additional information for the Requirement.",
+      "type": "array",
+      "items": {
+        "type": {
+          "$ref": "#requirementPart"
+        }
+      }
+    },
+    "parentRequirement": {
+      "description": "The parent Requirement of the current Requirement for hierarchical structure in which the parent and child are tied together and cannot be understood without each other. For a general parent-child relationship, Dependency should be used.",
+      "type": {
+        "$ref": "#requirement"
+      }
+    },
+    "required": [
+      "id",
+      "status",
+      "created_at"
+    ]
+  },
+  "project": {
+    "schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Project",
+    "description": "A set of interrelated activities, carefully planned usually by a project team, to be executed over a fixed period of time and within certain cost and other limitations of resources, to implement a certain software system.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier of a Project. Not a null value or an empty string.",
+        "type": "string"
+      },
+      "name": {
+        "description": "The name or title of a Project.",
+        "type": "string"
+      },
+      "text": {
+        "description": "The textual description or content of a Project. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "The creation time of a Project in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "modified_at": {
+        "description": "The latest modification time of a Project in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Association to Source of a Project, if any.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "comments": {
+        "description": "Aggregation of Comments associated to a Project, if any. See the Comment concept below for additional details.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#comment"
+          }
+        }
+      },
+      "attachments": {
+        "description": "Aggregation of Attachments associated to the element, if any.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#attachment"
+          }
+        }
+      },
+      "start_date": {
+        "description": "The start time of the Project in milliseconds. So called Unix time.",
+        "type": "long"
+      },
+      "end_date": {
+        "description": "The end time of the Project in milliseconds. So called Unix time.",
+        "type": "long"
+      },
+      "status": {
+        "description": "The state of the Project in its life cycle.",
+        "type": "string",
+        "enum": [
+          "archived",
+          "ongoing"
+        ]
+      },
+      "specifiedRequirements": {
+        "description": "The set of Requirements that have been specified for the project.",
+        "type": "array",
+        "items": {
+          "$ref": "#requirement"
+        }
+      },
+      "releases": {
+        "description": "The Releases planned to be delivered for a Project.",
+        "type": "array",
+        "items": {
+          "$ref": "#release"
+        }
+      }
+    },
+    "required": [
+      "id",
+      "specifiedRequirements",
+      "status",
+      "created_at"
+    ]
+  },
+  "release": {
+    "schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Release",
+    "description": "Deliverable planned for a Project, in which a subset of the Requirements of the Project are implemented.",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "The unique identifier of a Release. Not a null value or an empty string.",
+        "type": "string"
+      },
+      "name": {
+        "description": "The name or title of a Release.",
+        "type": "string"
+      },
+      "text": {
+        "description": "The textual description or content of a Release. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+        "type": "string"
+      },
+      "created_at": {
+        "description": "The creation time of a Release in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "modified_at": {
+        "description": "The latest modification time of a Release in milliseconds. So called Unix time.",
+        "type": "integer"
+      },
+      "source": {
+        "description": "Association to Source of a Release, if any.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          }
+        }
+      },
+      "comments": {
+        "description": "Aggregation of Comments associated to a Release, if any. See the Comment concept below for additional details.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#comment"
+          }
+        }
+      },
+      "attachments": {
+        "description": "Aggregation of Attachments associated to the element, if any.",
+        "type": "array",
+        "items": {
+          "type": {
+            "$ref": "#attachment"
+          }
+        }
+      },
+      "start_date": {
+        "description": "The start time of a Release in milliseconds. So called Unix time.",
+        "type": "long"
+      },
+      "release_date": {
+        "description": "The release time of Release in milliseconds. So called Unix time.",
+        "type": "long"
+      },
+      "status": {
+        "description": "The state of the Release in its life cycle.",
+        "type": "string",
+        "enum": [
+          "new",
+          "planned",
+          "active",
+          "completed",
+          "rejected"
+        ]
+      },
+      "capacity": {
+        "description": "The maximum effort capacity of the Release. The unit of measure is not specified as it depends on the application scenario.",
+        "type": "int"
+      },
+      "version": {
+        "description": "The version of a Release. It is recommended to conform to Maven artefact versioning, such as 1.2.3 or 2.3-alpha.",
+        "type": "string"
+      },
+      "requirements": {
+        "description": "The Requirements assigned to the Release",
+        "type": "array",
+        "items": {
+          "type": {
+            "ref": "#requirement"
+          }
+        }
+      }
+    },
+    "required": [
+      "id",
+      "status",
+      "capacity",
+      "created_at"
+    ]
+  },
+  "requirementPart": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Requirement part",
+    "description": "A part of which a Requirement is composed of (not a sub-requirement). RequirementParts are an extension mechanism for specifying additional information related to a Requirement. For example, RequirementPart can be used to include fragments of Requirement content or additional  properties of Requirement.",
+    "type": "object",
+    "id": {
+      "description": "The unique identifier of a RequirementPart. Not a null value or an empty string.",
+      "type": "string"
+    },
+    "name": {
+      "description": "The name or title of a RequirementPart.",
+      "type": "string"
+    },
+    "text": {
+      "description": "The textual description or content of a RequirementPart. Note that Attachments (see below) can be used for other than plain text format descriptions.",
+      "type": "string"
+    },
+    "created_at": {
+      "description": "The creation time of a RequirementPart in milliseconds. So called Unix time.",
+      "type": "integer"
+    },
+    "modified_at": {
+      "description": "The latest modification time of a RequirementPart in milliseconds. So called Unix time.",
+      "type": "integer"
+    },
+    "source": {
+      "description": "Association to Source of a RequirementPart, if any.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        }
+      }
+    },
+    "comments": {
+      "description": "Aggregation of Comments associated to a RequirementPart, if any. See the Comment concept below for additional details.",
+      "type": "array",
+      "items": {
+        "type": {
+          "$ref": "#comment"
+        }
+      }
+    },
+    "attachments": {
+      "description": "Aggregation of Attachments associated to the element, if any.",
+      "type": "array",
+      "items": {
+        "type": {
+          "$ref": "#attachment"
+        }
+      }
+    },
+    "required": [
+      "id",
+      "created_at"
+    ]
+  },
+  "dependency": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Dependency",
+    "description": "A relationship between Requirements. All relationships are binary relations between two Requirements.",
+    "type": "object",
+    "properties": {
+      "dependency_type": {
+        "description": "The type of the Dependency.",
+        "type": "string",
+        "enum": [
+          "contributes",
+          "damages",
+          "refines",
+          "requires",
+          "incompatible",
+          "decomposition",
+          "similar",
+          "duplicates",
+          "replaces",
+          "constraint"
+        ]
+      },
+      "dependency_score": {
+        "description": "An estimation of the reliability of the Dependency. The estimation is needed, e.g, when dependency is extracted by automation, such as natural language processing.",
+        "type": "float"
+      },
+      "status": {
+        "description": "The state of the Dependency in its life cycle.",
+        "type": "string",
+        "enum": [
+          "proposed",
+          "accepted",
+          "rejected"
+        ]
+      },
+      "description": {
+        "description": "A description or additional note of the Dependency. For example, the algorithm or source of the Dependency.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "fromid": {
+        "description": "The requirement from which the Dependency originates.",
+        "type": {
+          "$ref": "#requirement"
+        }
+      },
+      "toid": {
+        "description": "The requirement to which the Dependency points to.",
+        "type": {
+          "$ref": "#requirement"
+        }
+      }
+    },
+    "required": [
+      "dependency_type",
+      "created_at",
+      "fromid",
+      "toid"
+    ]
+  },
+  "person": {
+    "schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Person",
+    "description": "Someone that is Participant in a Project and is Responsible in some way of the Requirements.",
+    "type": "object",
+    "properties": {
+      "username": {
+        "description": "The visible username of the Person.",
+        "type": "string"
+      },
+      "email": {
+        "description": "The e-mail address of the Person.",
+        "type": "string"
+      },
+      "profile_image": {
+        "description": "The path to the profile image file of the Person.",
+        "type": "string"
+      }
+    },
+    "required": [
+      "username",
+      "email"
+    ]
+  },
+  "participant": {
+    "schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Participant",
+    "description": "The participation of a Person in a Project. A Person may participate in different Projects. On the other hand, one Project may have as participants different Persons. A Person can participate only in one Role in one Project.",
+    "type": "object",
+    "properties": {
+      "role_name": {
+        "description": "The participation role.",
+        "type": "string",
+        "enum": [
+          "project manager",
+          "tester",
+          "programmer",
+          "designer",
+          "architect",
+          "requirements engineer"
+        ]
+      },
+      "project": {
+        "description": "The Project in which the Person participates.",
+        "type": {
+          "$ref": "#project"
+        }
+      },
+      "person": {
+        "description": "The Person that participates in the Project.",
+        "type": {
+          "$ref": "#person"
+        }
+      }
+    },
+    "required": [
+      "role_name",
+      "project",
+      "person"
+    ]
+  },
+  "responsible": {
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "title": "Responsible",
+    "description": "The responsibility of a Person on a Requirement. A Person may have different responsibilities in different Requirements. On the other hand, one Requirement may have different Persons involved each having different responsibility.",
+    "type": "object",
+    "properties": {
+      "type": {
+        "description": "The type of the responsibility",
+        "type": "string",
+        "enum": [
+          "owner",
+          "developer"
+        ]
+      },
+      "requirement": {
+        "description": "The Requirement on which the Person is responsible.",
+        "type": {
+          "$ref": "#requirement"
+        }
+      },
+      "person": {
+        "description": "The Person that is responsible on the Requirement.",
+        "type": {
+          "$ref": "#person"
+        }
+      }
+    },
+    "required": [
+      "requirement",
+      "person"
+    ]
+  }
+}
