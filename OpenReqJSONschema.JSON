@@ -521,7 +521,9 @@
           "similar",
           "duplicates",
           "replaces",
-          "constraint"
+          "constraint",
+          "implies",
+          "excludes"
         ]
       },
       "dependency_score": {
