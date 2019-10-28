@@ -12,3 +12,4 @@ See the OpenReq Contribution Guidelines [here](https://github.com/OpenReqEU/Open
 ## License
 Free use of this software is granted under the terms of the EPL version 2 (EPL2.0).
 
+## Changes
